@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Основы философии - Студент НПЭК{% endblock %}
+
+{% block content %}
+<main class="main-container">
+    <section class="philosophy-page">
+        <div class="discipline-header">
+            <h1 class="gradient-text">Основы философии</h1>
+        </div>
+
+        <div class="philosophy-buttons">
+            <a href="{{ url_for('philosophy_document') }}" class="philosophy-button philosophy-button-primary">
+                📄 Документ "Основы философии"
+            </a>
+            <a href="#" class="philosophy-button philosophy-button-secondary">
+                🎮 Игры
+            </a>
+        </div>
+
+    </section>
+</main>
+{% endblock %}
+

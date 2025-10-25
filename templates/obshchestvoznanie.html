@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}Обществознание - Студент НПЭК{% endblock %}
+
+{% block content %}
+<main class="main-container">
+    <section class="philosophy-page">
+        <div class="discipline-header">
+            <h1 class="gradient-text">Обществознание</h1>
+            {% if selected_group %}
+            <p class="selected-group-info">📚 Группа: <strong>{{ selected_group }}</strong></p>
+            {% endif %}
+        </div>
+
+        <div class="philosophy-buttons">
+            <a href="{{ url_for('obshchestvoznanie_document') }}" class="philosophy-button philosophy-button-primary">
+                📄 Документ "Обществознание"
+            </a>
+            <a href="#" class="philosophy-button philosophy-button-secondary">
+                🎮 Игры
+            </a>
+        </div>
+        
+        {% if selected_group %}
+        <div class="back-button" style="margin-top: 2rem;">
+            <a href="{{ url_for('obshchestvoznanie') }}" class="back-link">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                Выбрать другую группу
+            </a>
+        </div>
+        {% endif %}
+
+    </section>
+</main>
+
+<style>
+.selected-group-info {
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    margin-top: 1rem;
+}
+
+.selected-group-info strong {
+    color: var(--primary);
+    font-weight: 700;
+}
+</style>
+{% endblock %}
+
+

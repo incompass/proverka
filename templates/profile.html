@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block title %}Профиль - Студент НПЭК{% endblock %}
+
+{% block content %}
+<main class="main-container main-profile">
+    <section class="profile-page">
+        <div class="profile-header">
+            <h1 class="gradient-text">Мой профиль</h1>
+        </div>
+
+        <div class="profile-content">
+            <div class="profile-card">
+                <div class="profile-avatar-large">
+                    {% if user.photo_url %}
+                    <img src="{{ user.photo_url }}" alt="Фото профиля">
+                    {% else %}
+                    <div class="avatar-letter">{{ user.last_name[0] }}</div>
+                    {% endif %}
+                    {% if user.has_premium %}
+                    <div class="premium-badge" title="Telegram Premium">⭐</div>
+                    {% endif %}
+                </div>
+                
+                <div class="profile-info">
+                    <div class="info-row">
+                        <span class="info-label">Фамилия:</span>
+                        <span class="info-value">{{ user.last_name }}</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Имя:</span>
+                        <span class="info-value">{{ user.first_name }}</span>
+                    </div>
+                    {% if user.middle_name %}
+                    <div class="info-row">
+                        <span class="info-label">Отчество:</span>
+                        <span class="info-value">{{ user.middle_name }}</span>
+                    </div>
+                    {% endif %}
+                    {% if user.group_name %}
+                    <div class="info-row">
+                        <span class="info-label">Группа:</span>
+                        <span class="info-value">{{ user.group_name }}</span>
+                    </div>
+                    {% endif %}
+                    {% if user.is_admin %}
+                    <div class="info-row">
+                        <span class="info-label">Статус:</span>
+                        <span class="info-value admin-badge-profile">👑 Администратор</span>
+                    </div>
+                    {% elif user.role == 'teacher' %}
+                    <div class="info-row">
+                        <span class="info-label">Статус:</span>
+                        <span class="info-value teacher-badge-profile">👨‍🏫 Учитель</span>
+                    </div>
+                    {% endif %}
+                    <div class="info-row">
+                        <span class="info-label">ID:</span>
+                        <span class="info-value">{{ user.telegram_id }}</span>
+                    </div>
+                </div>
+
+                <div class="profile-actions">
+                    <a href="{{ url_for('logout') }}" class="btn-logout">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                            <polyline points="16 17 21 12 16 7"/>
+                            <line x1="21" y1="12" x2="9" y2="12"/>
+                        </svg>
+                        Выйти
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}
+

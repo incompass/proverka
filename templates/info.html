@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block title %}О себе - Студент НПЭК{% endblock %}
+
+{% block content %}
+<main class="main-container main-info">
+    <section class="info-page">
+        <div class="page-header-info">
+            <h1 class="gradient-text">О себе</h1>
+            <p class="page-subtitle">Тимур Бежанович Думбадзе — преподаватель Новосибирского Промышленного Энергетического Колледжа. Преподаю общественные дисциплины, помогаю студентам развивать критическое мышление и понимание общественных процессов.</p>
+        </div>
+
+        <div class="info-section city-section">
+            <div class="info-card">
+                <div class="info-image-container">
+                    <img src="{{ url_for('static', filename='images/nsk.png') }}" alt="Новосибирск" class="info-image">
+                    <div class="image-overlay"></div>
+                </div>
+                <div class="info-content">
+                    <h2>Новосибирск мой родной город</h2>
+                    <p class="info-text">Специалист с высшим образованием</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-section teacher-section">
+            <div class="info-card reverse">
+                <div class="info-content">
+                    <h2>Тимур Бежанович Думбадзе</h2>
+                    <p class="teacher-role">Преподаватель Истории, Обществознания и Философии</p>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                                <polyline points="22,6 12,13 2,6"/>
+                            </svg>
+                            <a href="mailto:tim78N@yandex.ru">tim78N@yandex.ru</a>
+                        </div>
+                        <div class="contact-item">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <line x1="2" y1="12" x2="22" y2="12"/>
+                                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                            </svg>
+                            <a href="https://sites.google.com/view/npek-student/" target="_blank">sites.google.com/view/npek-student</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-image-container">
+                    <img src="{{ url_for('static', filename='images/tim.png') }}" alt="Тимур Бежанович Думбадзе" class="info-image teacher-image">
+                    <div class="image-overlay"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-section quote-section">
+            <div class="quote-card">
+                <div class="quote-icon">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z"/>
+                    </svg>
+                </div>
+                <blockquote class="quote-text">
+                    Образование - самое мощное оружие, которое вы можете использовать, чтобы изменить мир.
+                </blockquote>
+                <cite class="quote-author">— Нельсон Мандела</cite>
+            </div>
+        </div>
+
+        <div class="info-section philosophy-section">
+            <div class="philosophy-card">
+                <div class="philosophy-icon">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                    </svg>
+                </div>
+                <p class="philosophy-text">
+                    В прошлом образование было доступно только богатым и привилегированным людям, поэтому власть 
+                    оставалась за элитой. Время шло и менялось, люди из всех слоев общества получили возможность 
+                    учиться, а благодаря преподавателям у них появилась возможность исследовать мир и использовать 
+                    знания как оружие, чтобы сделать мир лучше.
+                </p>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}
+

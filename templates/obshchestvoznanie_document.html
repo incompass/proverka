@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}Документ "Обществознание" - Студент НПЭК{% endblock %}
+
+{% block content %}
+<main class="main-container">
+    <section class="philosophy-document-page">
+        <div class="document-header">
+            <h1 class="gradient-text">📄 Документ "Обществознание"</h1>
+            <p>Выберите способ просмотра документа</p>
+        </div>
+
+        <div class="document-options">
+            <a href="{{ document_url }}" target="_blank" class="document-option document-option-google">
+                <div class="option-icon">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                        <polyline points="15 3 21 3 21 9"/>
+                        <line x1="10" y1="14" x2="21" y2="3"/>
+                    </svg>
+                </div>
+                <div class="option-content">
+                    <h3>Открыть в Google Docs</h3>
+                    <p>Открыть документ в оригинальном интерфейсе Google Docs с полным функционалом</p>
+                </div>
+            </a>
+
+            <a href="{{ url_for('obshchestvoznanie_fullscreen') }}" target="_blank" class="document-option document-option-fullscreen">
+                <div class="option-icon">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>
+                    </svg>
+                </div>
+                <div class="option-content">
+                    <h3>Полноэкранный режим</h3>
+                    <p>Открыть документ в полноэкранном режиме на сайте</p>
+                </div>
+            </a>
+        </div>
+
+        <div class="back-button">
+            <a href="{{ url_for('obshchestvoznanie') }}" class="back-link">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                Назад к дисциплине
+            </a>
+        </div>
+    </section>
+</main>
+{% endblock %}
+
+

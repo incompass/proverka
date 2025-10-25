@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+
+{% block title %}Вход для администрации - Студент НПЭК{% endblock %}
+
+{% block content %}
+<main class="main-container">
+    <section class="login-section">
+        <div class="login-container">
+            <h1 class="login-title">Вход для администрации</h1>
+            
+            {% if error %}
+            <div class="error-message">{{ error }}</div>
+            {% endif %}
+            
+            {% if step == 'select_user' %}
+            <form method="POST" class="login-form">
+                <input type="hidden" name="action" value="select_user">
+                
+                <div class="form-group">
+                    <label>Выберите свой профиль:</label>
+                    {% if users %}
+                    <div class="user-list">
+                        {% for user in users %}
+                        <button type="submit" name="user_id" value="{{ user.id }}" class="user-card">
+                            <div class="user-info">
+                                <strong>{{ user.last_name }} {{ user.first_name }} {{ user.middle_name or '' }}</strong>
+                                {% if user.role == 'teacher' %}
+                                <span class="user-badge teacher-badge">Учитель</span>
+                                {% elif user.is_admin %}
+                                <span class="user-badge admin-badge">Админ</span>
+                                {% endif %}
+                                {% if user.group_name %}
+                                <span class="user-group">Группа: {{ user.group_name }}</span>
+                                {% endif %}
+                            </div>
+                        </button>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    <div class="login-info">
+                        <p>Нет зарегистрированных администраторов.</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </form>
+            {% elif step == 'enter_code' %}
+            <form method="POST" class="login-form">
+                <input type="hidden" name="action" value="verify_code">
+                
+                <div class="code-sent-message">
+                    <h3>Код отправлен в Telegram</h3>
+                    <p>Проверь сообщение от бота @npeks_bot</p>
+                </div>
+                
+                <div class="form-group">
+                    <label for="code">Введи 4-значный код:</label>
+                    <input 
+                        type="text" 
+                        id="code" 
+                        name="code" 
+                        class="code-input" 
+                        maxlength="4" 
+                        pattern="[0-9]{4}" 
+                        required 
+                        autofocus
+                        placeholder="0000"
+                    >
+                </div>
+                
+                <button type="submit" class="btn-primary">Войти</button>
+                <a href="{{ url_for('rub_login') }}" class="btn-secondary">Назад</a>
+            </form>
+            {% endif %}
+        </div>
+    </section>
+</main>
+
+<style>
+.teacher-badge {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-left: 8px;
+}
+
+.admin-badge {
+    background: linear-gradient(135deg, #f093fb, #f5576c);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-left: 8px;
+}
+
+.user-group {
+    display: block;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-top: 4px;
+}
+</style>
+{% endblock %}
+
+

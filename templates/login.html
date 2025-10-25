@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+
+{% block title %}Вход в профиль - Студент НПЭК{% endblock %}
+
+{% block content %}
+<main class="main-container main-login">
+    <section class="login-page">
+        <div class="login-container">
+            <h1 class="gradient-text">Вход в профиль</h1>
+            
+            {% if step == 'select_group' %}
+            <div class="login-card">
+                <div class="login-info">
+                    <p>Ты зарегистрирован в системе?</p>
+                </div>
+                
+                <form method="POST" class="login-form" style="margin-bottom: 24px;">
+                    <input type="hidden" name="action" value="select_group">
+                    <label for="group">Войти в аккаунт</label>
+                    <select name="group" id="group" required>
+                        <option value="">-- Выбери свою группу --</option>
+                        {% for group in groups %}
+                        <option value="{{ group }}">{{ group }}</option>
+                        {% endfor %}
+                    </select>
+                    <button type="submit" class="btn-primary">Войти</button>
+                </form>
+                
+                <div class="login-divider">
+                    <span>или</span>
+                </div>
+                
+                <a href="https://t.me/npeks_bot?start=hi" target="_blank" class="bot-link" style="margin-top: 24px;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.02-1.96 1.24-5.54 3.65-.52.36-.99.53-1.4.52-.46-.01-1.35-.26-2.01-.48-.81-.27-1.45-.42-1.4-.88.03-.24.37-.49 1.03-.74 4.04-1.76 6.73-2.92 8.08-3.49 3.85-1.61 4.65-1.89 5.17-1.89.11 0 .37.03.54.17.14.11.18.26.2.37.01.06.03.24.01.38z"/>
+                    </svg>
+                    Зарегистрироваться через @npeks_bot
+                </a>
+                
+                <div class="login-note">
+                    Если ты не зарегистрирован через бота, тебя не будет в списке студентов
+                </div>
+            </div>
+            {% elif step == 'select_user' %}
+            <div class="login-card">
+                <div class="breadcrumb">
+                    <span>Группа: <strong>{{ selected_group }}</strong></span>
+                </div>
+                
+                {% if error %}
+                <div class="error-message">{{ error }}</div>
+                {% endif %}
+                
+                {% if users %}
+                <form method="POST" class="login-form">
+                    <input type="hidden" name="action" value="select_user">
+                    <label for="user_id">Найди себя в списке:</label>
+                    <select name="user_id" id="user_id" required>
+                        <option value="">-- Выбери своё имя --</option>
+                        {% for user in users %}
+                        <option value="{{ user.id }}">{{ user.last_name }} {{ user.first_name }}</option>
+                        {% endfor %}
+                    </select>
+                    <button type="submit" class="btn-primary">Получить код в Telegram</button>
+                    <a href="{{ url_for('login') }}" class="btn-secondary">Назад</a>
+                </form>
+                {% else %}
+                <div class="login-info">
+                    <p>В этой группе пока никто не зарегистрирован через бота.</p>
+                    <a href="https://t.me/npeks_bot?start=hi" target="_blank" class="bot-link">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.02-1.96 1.24-5.54 3.65-.52.36-.99.53-1.4.52-.46-.01-1.35-.26-2.01-.48-.81-.27-1.45-.42-1.4-.88.03-.24.37-.49 1.03-.74 4.04-1.76 6.73-2.92 8.08-3.49 3.85-1.61 4.65-1.89 5.17-1.89.11 0 .37.03.54.17.14.11.18.26.2.37.01.06.03.24.01.38z"/>
+                        </svg>
+                        Зарегистрироваться через @npeks_bot
+                    </a>
+                </div>
+                <a href="{{ url_for('login') }}" class="btn-secondary">Назад</a>
+                {% endif %}
+            </div>
+            {% elif step == 'enter_code' %}
+            <div class="login-card">
+                <div class="code-info">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                    </svg>
+                    <h3>Код отправлен в Telegram</h3>
+                    <p>Проверь сообщение от бота @npeks_bot</p>
+                </div>
+                
+                {% if error %}
+                <div class="error-message">{{ error }}</div>
+                {% endif %}
+                
+                <form method="POST" class="login-form">
+                    <input type="hidden" name="action" value="verify_code">
+                    <label for="code">Введи код из сообщения:</label>
+                    <input type="text" name="code" id="code" maxlength="4" pattern="[0-9]{4}" 
+                           placeholder="0000" required autocomplete="off" class="code-input">
+                    <button type="submit" class="btn-primary">Войти</button>
+                    <a href="{{ url_for('login') }}" class="btn-secondary">Отмена</a>
+                </form>
+            </div>
+            {% endif %}
+        </div>
+    </section>
+</main>
+{% endblock %}
+

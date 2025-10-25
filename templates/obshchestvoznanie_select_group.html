@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+
+{% block title %}Выбор группы - Обществознание{% endblock %}
+
+{% block content %}
+<main class="main-container">
+    <section class="group-selection-page">
+        <div class="discipline-header">
+            <h1 class="gradient-text">📚 Обществознание</h1>
+            <p class="subtitle">Выбери группу для просмотра материалов</p>
+        </div>
+
+        <div class="groups-container">
+            <div class="groups-section">
+                <div class="groups-grid">
+                    {% for group in all_groups %}
+                    <a href="{{ url_for('obshchestvoznanie_for_group', group_name=group) }}" class="group-card">
+                        <div class="group-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                                <circle cx="9" cy="7" r="4"/>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                            </svg>
+                        </div>
+                        <span class="group-name">{{ group }}</span>
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <div class="back-button">
+            <a href="{{ url_for('index') }}" class="back-link">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                Назад на главную
+            </a>
+        </div>
+    </section>
+</main>
+
+<style>
+.group-selection-page {
+    padding: 2rem 0;
+}
+
+.subtitle {
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    margin-top: 0.5rem;
+}
+
+.groups-container {
+    margin-top: 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.groups-section {
+    background: var(--bg-card);
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: var(--shadow-lg);
+}
+
+.groups-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 1rem;
+}
+
+.group-card {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    border-radius: 15px;
+    padding: 1.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+    color: #ffffff !important;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.group-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
+    background: linear-gradient(135deg, #7c8ff5 0%, #8a5bb8 100%) !important;
+}
+
+.group-icon {
+    width: 48px;
+    height: 48px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.group-card:hover .group-icon {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+}
+
+.group-name {
+    font-weight: 600;
+    font-size: 1rem;
+    text-align: center;
+    color: #ffffff !important;
+}
+
+@media (max-width: 768px) {
+    .groups-grid {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 0.75rem;
+    }
+    
+    .group-card {
+        padding: 1rem 0.75rem;
+    }
+    
+    .groups-section {
+        padding: 1.5rem;
+    }
+}
+</style>
+{% endblock %}
+
